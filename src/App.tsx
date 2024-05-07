@@ -2,7 +2,7 @@ import {useState} from 'react'
 import styled, {css} from "styled-components"
 import Home from "./Home.tsx";
 import Profile from "./Profile.tsx";
-import Diary from "./Diary.tsx";
+import Calendar from "./Calendar.tsx";
 
 export type View = "HOME" | "DIARY" | "PROFILE";
 
@@ -141,7 +141,7 @@ function App() {
                     currentView === "HOME" && <Home></Home>
                 }
                 {
-                    currentView === "DIARY" && <Diary></Diary>
+                    currentView === "DIARY" && <Calendar></Calendar>
                 }
                 {
                     currentView === "PROFILE" && <Profile></Profile>
