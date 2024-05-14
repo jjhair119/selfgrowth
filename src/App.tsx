@@ -100,10 +100,10 @@ export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: bo
     border-radius: 12px;
     border: none;
     
-    width: 126px;
+    width: fit-content;
     height: min-content;
-    padding: 12px;
-    margin: 0 10%;
+    padding: 10px 32px;
+    margin: 28px 14px 0 20px;
     
     color: black;
     font-weight: bold;

@@ -4,6 +4,7 @@ import {ConfirmButton} from "./App.tsx";
 import Diary from "./Diary.tsx";
 
 const CalendarWrap = styled.div`
+    
     display: flex;
     vertical-align: center;
     justify-content: center;
@@ -11,7 +12,7 @@ const CalendarWrap = styled.div`
 
     background: #FFD66C;
 
-    padding: 64px;
+    padding: 128px;
     flex-direction: column;
     flex-grow: 1;
 `
@@ -24,10 +25,19 @@ const CalendarView = styled.div`
     flex-grow: 0;
 
     width: 40%;
-    height: 70%;
 
-    padding: 34px;
-    border-radius: 32px;
+    padding: 64px 32px;
+    border-radius: 64px;
+`
+
+const HeaderWrap = styled.div`
+    display: flex;
+    justify-content: space-between;
+    vertical-align: center;
+    text-align: center;
+
+    width: 100%;
+    padding: 12px;
 `
 
 const CalendarHeader = styled.div`
@@ -38,11 +48,19 @@ const CalendarHeader = styled.div`
     height: 20%;
 
     font-weight: bolder;
-    font-size: 24px;
+    font-size: 20px;
 
     opacity: 60%;
 
     margin: 16px 0;
+    
+    a {
+        width: 40px;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        flex-shrink: 1;
+    }
 `
 
 const CalendarWeek = styled.div`
@@ -54,6 +72,16 @@ const CalendarWeek = styled.div`
 
 const DayWrap = styled.div`
     display: flex;
+    flex-direction: column;
+    
+    height: 100%;
+    
+    justify-content: space-around;
+    
+`
+
+const WeekWrap = styled.div`
+    display: flex;
     flex-direction: row;
     
     height: 100%;
@@ -62,31 +90,61 @@ const DayWrap = styled.div`
     
 `
 
-const CalendarDayButton = styled.div`
+const BlankDay = styled.div`
+    display: flex;
+
+    width: 40px;
+    height: 40px;
+`
+
+const CalendarDayButton = styled.div<{ $selectedDay?: number, $self?:number, $isSelected?:boolean}>`
     display: flex;
     
     width: 40px;
     height: 40px;
-    border-radius: 4px;
+    border-radius: 6px;
     
     align-items: center;
     justify-content: center;
+    
+    margin : 14px 0;
 
     background: #fff;
     
     color: #000;
     
     &:hover {
-        background: #e6e6e6;
+        ${(props) => (!props.$isSelected) && css`
+            background: #e6e6e6;
+        `}
     }
+
+    ${(props) => (props.$isSelected && (props.$selectedDay === props.$self)) && css`
+        background: #FFA07D;
+    `}
 `
 
 const ConfirmButtonWrap = styled.div`
     display: flex;
-    flex-direction: row;
     align-items: center;
-    width: 100%;
-    justify-content: space-around;
+`
+
+const ChangeMonthButton = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    
+    color: #fff;
+    background: #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    font-weight: bolder;
+    
+    margin: 0 18px;
 `
 
 interface CalendarProps {
@@ -95,28 +153,57 @@ interface CalendarProps {
 export type CalendarView = "CALENDAR"|"DIARY";
 
 const Calendar: React.FC<CalendarProps> = () => {
-    const thisDay = new Date();
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const [thisDay, setThisDay] = useState(new Date());
     const year = thisDay.getFullYear();
-    const month = thisDay.getMonth();
+    const [month, setMonth] = useState<number>(thisDay.getMonth());
     const [day, setDay] = useState<number>(thisDay.getDate());
+
+
 
     const [isSelected, setIsSelected] = useState<boolean>(false);
     const [currentView, setCurrentView] = useState<CalendarView>("CALENDAR");
 
-    const handleDate = (selectedDay:number) => {
-        setDay(selectedDay);
-    }
+    const handleDate = (currentDay:number) => {
+        setDay(currentDay);
+        if (day === currentDay){
+            if (!isSelected) setIsSelected(true)
+            else {
+                setIsSelected(false)
+            }
+        }
+    } //왜 오류나는지는 알겠는데 고치지를 못하겠네
 
-    const days_sample = Array.from({length: 35}, (_, index) => (
-        <CalendarDayButton className="calendar-day fill" key={`day-${index}`} onClick={()=>handleDate(index+1)}>
-            <div>{index + 1}</div>
+    const days_n = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+
+    const blanks = Array(firstDay).fill(null).map((value, index) => (
+        <BlankDay key={`blank-${index}`} className="calendar-day empty"></BlankDay>
+    ));
+
+    const days = Array.from({length: days_n}, (_, index) => (
+        <CalendarDayButton className="calendar-day fill" key={`day-${index}`} onClick={() => handleDate(index)} $selectedDay={day} $self={index} $isSelected={isSelected}>
+            {index+1}
         </CalendarDayButton>
     ));
 
-    const weeks = Array.from({length: Math.ceil(days_sample.length / 7)}, (_, index) => (
-        <div key={`week-${index}`} className="calendar-week day">
-            {days_sample.slice(index * 7, index * 7 + 7)}
-        </div>
+    let endBlanksNum = 35 - (firstDay+days_n);
+    if (endBlanksNum<0) {
+        endBlanksNum = 0;
+    }
+    const endBlanks = Array(endBlanksNum).fill(null).map((value, index) => (
+        <BlankDay key={`blank-${index}`} className="calendar-day empty"></BlankDay>
+    ));
+
+    const full_days = [...blanks, ...days, ...endBlanks];
+
+    const weeks = Array.from({length: Math.ceil(full_days.length / 7)}, (_, index) => (
+        <WeekWrap key={`week-${index}`} className="calendar-week day">
+            {full_days.slice(index * 7, index * 7 + 7)}
+        </WeekWrap>
     ));
 
     const onClickApply = () => {
@@ -124,14 +211,25 @@ const Calendar: React.FC<CalendarProps> = () => {
         setCurrentView("DIARY");
     }
 
+    const onClickChangeMonth = (state:boolean) => {
+        //state = true -> past, false -> next
+
+        if (state) setMonth(month-1);
+        else setMonth(month+2);
+    }
+
     return (
         <div style={{height:"100%"}}>
             <CalendarWrap>
                 {
                     currentView == "CALENDAR" && <CalendarView>
-                        <div style={{height: 64}}>
-                            이전달~ {year}년 {month + 1}월 {day}일 다음달~
-                        </div>
+                        <HeaderWrap>
+                            <ChangeMonthButton onClick={() => onClickChangeMonth(true)}>&lt;</ChangeMonthButton>
+                            <div style={{height: 64, fontSize:24, fontWeight:"bolder"}}>
+                                {monthNames[month]} {year}
+                            </div>
+                            <ChangeMonthButton onClick={() => onClickChangeMonth(false)}>&gt;</ChangeMonthButton>
+                        </HeaderWrap>
                         <CalendarHeader>
                             <a>Sun</a>
                             <a>Mon</a>
@@ -147,14 +245,13 @@ const Calendar: React.FC<CalendarProps> = () => {
                             </DayWrap>
                         </CalendarWeek>
                         <ConfirmButtonWrap>
-                            <ConfirmButton $bgColor={"#e6e6e6"}>cancel</ConfirmButton>
                             <ConfirmButton $bgColor={"#e6e6e6"} $isSelected={isSelected} onClick={()=>onClickApply()}>apply</ConfirmButton>
                         </ConfirmButtonWrap>
                     </CalendarView>
                 }
                 {
                     currentView == "DIARY" && <Diary
-                        year={year} month={month} day={day}
+                        year={year} month={month} day={day+1}
                         setCurrentView={setCurrentView}
                     ></Diary>
                 }
