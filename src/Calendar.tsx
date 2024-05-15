@@ -155,16 +155,32 @@ export type CalendarView = "CALENDAR"|"DIARY";
 const Calendar: React.FC<CalendarProps> = () => {
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
-    ];
+    ]; //달 영문 표기용
 
+    //날짜 선언
     const [thisDay, setThisDay] = useState(new Date());
     const year = thisDay.getFullYear();
-    const [month, setMonth] = useState<number>(thisDay.getMonth());
-    const [day, setDay] = useState<number>(thisDay.getDate());
+    const month = thisDay.getMonth();
+    const day = thisDay.getDate();
 
+    // const setYear = (data:number) => {
+    //     const newDate = new Date(data, month, day)
+    //     setThisDay(newDate);
+    // }
 
+    const setMonth = (data:number) => {
+        const newDate = new Date(year, data-1, day)
+        setThisDay(newDate);
+    }
 
+    const setDay = (data:number) => {
+        const newDate = new Date(year, month, data)
+        setThisDay(newDate);
+    }
+
+    //날짜 선택 여부
     const [isSelected, setIsSelected] = useState<boolean>(false);
+    //calendar, diary 중 현재 view 구분
     const [currentView, setCurrentView] = useState<CalendarView>("CALENDAR");
 
     const handleDate = (currentDay:number) => {
@@ -175,48 +191,54 @@ const Calendar: React.FC<CalendarProps> = () => {
                 setIsSelected(false)
             }
         }
-    } //왜 오류나는지는 알겠는데 고치지를 못하겠네
+    } //날짜 선택
+    //왜 오류나는지는 알겠는데 고치지를 못하겠네
 
+    //총 날짜 수, 시작 요일
     const days_n = new Date(year, month + 1, 0).getDate();
     const firstDay = new Date(year, month, 1).getDay();
 
     const blanks = Array(firstDay).fill(null).map((value, index) => (
         <BlankDay key={`blank-${index}`} className="calendar-day empty"></BlankDay>
-    ));
+    )); //앞쪽 black 처리
 
     const days = Array.from({length: days_n}, (_, index) => (
         <CalendarDayButton className="calendar-day fill" key={`day-${index}`} onClick={() => handleDate(index)} $selectedDay={day} $self={index} $isSelected={isSelected}>
             {index+1}
         </CalendarDayButton>
-    ));
+    )); //날짜 처리
 
     let endBlanksNum = 35 - (firstDay+days_n);
     if (endBlanksNum<0) {
-        endBlanksNum = 0;
-    }
+        endBlanksNum = 7+endBlanksNum;
+    } //6주 처리
+
     const endBlanks = Array(endBlanksNum).fill(null).map((value, index) => (
         <BlankDay key={`blank-${index}`} className="calendar-day empty"></BlankDay>
-    ));
+    )); //뒤쪽 blank 처리
 
+    //blank 포함한 모든 날짜
     const full_days = [...blanks, ...days, ...endBlanks];
 
     const weeks = Array.from({length: Math.ceil(full_days.length / 7)}, (_, index) => (
         <WeekWrap key={`week-${index}`} className="calendar-week day">
             {full_days.slice(index * 7, index * 7 + 7)}
         </WeekWrap>
-    ));
+    )); //주 단위로 분리
 
     const onClickApply = () => {
-        setIsSelected(false);
-        setCurrentView("DIARY");
-    }
+        if (isSelected){
+            setIsSelected(false);
+            setCurrentView("DIARY");
+        }
+    } //날짜 선택 후 Diary로 이동
 
-    const onClickChangeMonth = (state:boolean) => {
+    const onClickMonthChanger = (state:boolean) => {
         //state = true -> past, false -> next
 
         if (state) setMonth(month-1);
         else setMonth(month+2);
-    }
+    } //달 변경
 
     return (
         <div style={{height:"100%"}}>
@@ -224,11 +246,11 @@ const Calendar: React.FC<CalendarProps> = () => {
                 {
                     currentView == "CALENDAR" && <CalendarView>
                         <HeaderWrap>
-                            <ChangeMonthButton onClick={() => onClickChangeMonth(true)}>&lt;</ChangeMonthButton>
+                            <ChangeMonthButton onClick={() => onClickMonthChanger(true)}>&lt;</ChangeMonthButton>
                             <div style={{height: 64, fontSize:24, fontWeight:"bolder"}}>
                                 {monthNames[month]} {year}
                             </div>
-                            <ChangeMonthButton onClick={() => onClickChangeMonth(false)}>&gt;</ChangeMonthButton>
+                            <ChangeMonthButton onClick={() => onClickMonthChanger(false)}>&gt;</ChangeMonthButton>
                         </HeaderWrap>
                         <CalendarHeader>
                             <a>Sun</a>
@@ -251,7 +273,7 @@ const Calendar: React.FC<CalendarProps> = () => {
                 }
                 {
                     currentView == "DIARY" && <Diary
-                        year={year} month={month} day={day+1}
+                        year={year} month={month} day={day}
                         setCurrentView={setCurrentView}
                     ></Diary>
                 }
