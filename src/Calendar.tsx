@@ -226,8 +226,8 @@ const Calendar: React.FC<CalendarProps> = () => {
 
     //날짜 처리
     const days = Array.from({length: days_n}, (_, index) => (
-        <CalendarDayButton className="calendar-day fill" key={`day-${index}`} onClick={() => handleDate(index)}
-                           $selectedDay={selectedDay} $self={index}>
+        <CalendarDayButton className="calendar-day fill" key={`day-${index}`} onClick={() => handleDate(index+1)}
+                           $selectedDay={selectedDay} $self={index+1}>
             {index + 1}
         </CalendarDayButton>
     ));
@@ -280,7 +280,7 @@ const Calendar: React.FC<CalendarProps> = () => {
         setSelectedDay(undefined);
     }, [currentMonth]);
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     //이전 페이지로 돌아가기
     //라우팅이 안되어있어서 작동 x -> 라우팅 작업 필요함...
