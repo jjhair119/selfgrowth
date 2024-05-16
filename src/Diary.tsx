@@ -5,7 +5,7 @@ import {MainButton} from "./App.tsx";
 interface DiaryProps {
     year:number;
     month:number;
-    day:number;
+    day?:number;
     setCurrentView: (view: CalendarView) => void;
 }
 

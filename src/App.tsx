@@ -3,13 +3,20 @@ import styled, {css} from "styled-components"
 import Home from "./Home.tsx";
 import Profile from "./Profile.tsx";
 import Calendar from "./Calendar.tsx";
+import "./App.css";
 
 export type View = "HOME" | "DIARY" | "PROFILE";
+
+//navigation 높이
+export const NAV_HEIGHT = 160;
 
 const Wrap = styled.div`
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+
+    min-width: 870px;
+    
     align-items: center;
     justify-content: center;
     
@@ -20,14 +27,16 @@ const NavigationWrap = styled.div<{ $bgColor?: string }>`
     display: flex;
     align-content: space-around;
     justify-content: center;
-    padding: 64px 0;
+    align-items: center;
     
     width: 100%;
+    height: ${NAV_HEIGHT}px;
+    box-sizing: border-box;
 `
 
 const MainContentWrap = styled.div`
     width: 100%;
-    height: 80%;
+    height: calc(100vh - ${NAV_HEIGHT}px);
     vertical-align: center;
 `
 
@@ -76,18 +85,20 @@ export const MainButton = styled.button<{$currentButton?:View}>`
     }
 
     padding: 8px 16px;
-    margin: 0 64px;
+    margin: 0 104px;
     width: 152px;
     height: 52px;
     border-radius: 50px;
     border: none;
+    
+    min-width: 132px;
 
     box-shadow: 1px 2px 4px 1px #999;
 
     justify-content: center;
 `
 
-export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: boolean}>`
+export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: number}>`
     display: flex;
     flex-grow: 1;
     
@@ -100,10 +111,10 @@ export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: bo
     border-radius: 12px;
     border: none;
     
-    width: 126px;
+    width: fit-content;
     height: min-content;
-    padding: 12px;
-    margin: 0 10%;
+    padding: 10px 32px;
+    margin: 28px 14px 0 20px;
     
     color: black;
     font-weight: bold;
