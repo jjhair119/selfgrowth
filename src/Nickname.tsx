@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // Container 스타일을 styled.div로 생성
 const Container = styled.div`
-  background: linear-gradient(118deg, #EB7125 0%, #CB4E00 100.36%);
+  background: #FFD66C;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -33,13 +33,13 @@ const PreviousButton = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  cursor: pointer;
+  cursor: poInter;
 `;
 
 const PageTitle = styled.h1`
   color: #000;
   text-align: center;
-  font-family: Pretendard;
+  font-family: Inter;
   font-size: 48px;
   font-style: normal;
   font-weight: 600;
@@ -55,13 +55,13 @@ const NextButton = styled.button`
   width: 324px;
   height: 77px;
   border-radius: 40px;
-  background: #EB7125;
-  cursor: pointer;
-  color: #FFF;
+  background: #FFD66C;
+  cursor: poInter;
+  color: #000000;
   text-align: center;
   font-size: 40px;
   font-style: normal;
-  font-family: Pretendard;
+  font-family: Inter;
   font-weight: 500;
 `;
 
@@ -89,10 +89,10 @@ const InputBar = styled.input`
   margin-top: 700px;
   width: 934px;
   height: 90px;
-  border-radius: 40px;
+  border-radius: 70px;
   border: 2px solid #000;
-  color: rgba(0, 0, 0, 0.50);
-  font-family: Pretendard;
+  color: #F8EFD8;
+  font-family: Inter;
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
@@ -117,7 +117,7 @@ function Nickname(): JSX.Element {
   const handleNextButtonClick = (): void => {
     if (isValidNickname) {
       // isValidNickname가 유효한 경우 다음 페이지로 이동
-      navigate('/setProfile');
+      navigate('/character');
     }
   };
 
@@ -126,22 +126,22 @@ function Nickname(): JSX.Element {
   };
 
   return (
-    <Container> {/* 주황색 화면 */}
-      <WhiteBox> {/* 흰 박스 */}
+    <Container>
+      <WhiteBox> 
         <ButtonBox>
           <PageTitle>닉네임 설정</PageTitle>
           <PreviousButton onClick={BackBtn}>←</PreviousButton>
-          <h5 style={{ position: "absolute", top: "275px", fontFamily: "Pretendard", fontSize: "20px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" }}>6글자 이내, 띄어쓰기 x</h5>
-          <InputBar placeholder='큐피에서 사용할 닉네임을 입력해주세요.'
+          <h5 style={{ position: "absolute", top: "275px", fontFamily: "Inter", fontSize: "20px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" }}>6글자 이내, 띄어쓰기 x</h5>
+          <InputBar placeholder='나 키우기에서 사용할 닉네임을 입력해주세요.'
             id="nickname" type="text" value={nickname} onChange={handleNicknameChange}></InputBar>
           <div className="help">
             {isValidNickname ? (
-              <span className="success" style={{ position: "absolute", color: '#22C807', fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top: "57%", left: "23%" }}>사용할 수 있는 닉네임입니다.</span>
+              <span className="success" style={{ position: "absolute", color: '#22C807', fontFamily: "Inter", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top: "57%", left: "23%" }}>사용할 수 있는 닉네임입니다.</span>
             ) : (
-              <span className="fail" style={{ position: "absolute", color: '#F00', fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top: "57%", left: "23%" }}>사용할 수 없는 닉네임입니다.</span>
+              <span className="fail" style={{ position: "absolute", color: '#F00', fontFamily: "Inter", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top: "57%", left: "23%" }}>사용할 수 없는 닉네임입니다.</span>
             )}
           </div>
-          <NextButton onClick={handleNextButtonClick}>다음</NextButton>
+          <NextButton onClick={handleNextButtonClick}>설정완료</NextButton>
         </ButtonBox>
       </WhiteBox>
     </Container>

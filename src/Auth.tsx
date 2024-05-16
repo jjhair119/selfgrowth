@@ -49,13 +49,13 @@ function Auth(): JSX.Element {
             if (isNew) {
                 localStorage.setItem('accesstoken', ret.data.result.accessToken);
                 localStorage.setItem('userId', ret.data.result.userId.toString());
-                navigate("/nickname");
+                navigate("/setprofile"); //프로필 설정화면으로 이동
             }
             localStorage.setItem('accesstoken', ret.data.result.accessToken);
             localStorage.setItem('userId', ret.data.result.userId.toString());
-            navigate("/mainpage");
+            navigate("/main"); //이미 회원가입했던 클라이언트라면 바로 홈화면으로 이동
         } else {
-            console.log("Login Failed");
+            console.log("Login Failed"); //실패시
         }
     }
 

@@ -1,21 +1,16 @@
 // //@ts-nocheck
 // //로그인페이지1
-import  React, { ButtonHTMLAttributes } from "react";
+import  React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import logo from "src/logo.svg";
 import nlogo from "src/naver.svg";
 import klogo from "src/kakao.svg";
 import glogo from "src/google.svg";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    color: string;
-    textColor: string; 
-  }
   
 // 스타일드 컴포넌트 정의
 const Container = styled.div`
-  background: linear-gradient(118deg, #EB7125 0%, #CB4E00 100.36%);
+  background: #FFD66C;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -64,89 +59,89 @@ const Logo = styled.div`
   justify-content: center;
 `;
 
-// const Button = styled.button`
-//   border-radius: 40px;
-//   border: none;
-//   margin: 20px;
-//   width: 552px;
-//   height: 90px;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background: ${props => props.color || "#EEE"}; // 기본 색상 설정
+const Button = styled.button<{$color?: string, $textColor?: string}>`
+  border-radius: 40px;
+  border: none;
+  margin: 20px;
+  width: 552px;
+  height: 90px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => props.$color || "#EEE"}; // 기본 색상 설정
 
-//   & > img {
-//     margin-right: 28%;
-//   }
+  & > img {
+    margin-right: 28%;
+  }
 
-//   & > span {
-//     margin-left: -24%;
-//     color: ${props => props.textColor || "#424242"};
-//     text-align: center;
-//     font-family: "Pretendard";
-//     font-size: 28px;
-//     font-style: normal;
-//     font-weight: 600;
-//     line-height: normal;
-//   }
-// `;
+  & > span {
+    margin-left: -24%;
+    color: ${props => props.$textColor || "#424242"};
+    text-align: center;
+    font-family: "Pretendard";
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+`;
 
-// // Button 컴포넌트에 적용할 각각의 색상
-// const Button1 = styled(Button)`
-//   background: #00C73C;
-// `;
+// Button 컴포넌트에 적용할 각각의 색상
+const Button1 = styled(Button)`
+  background: #00C73C;
+`;
 
-// const Button2 = styled(Button)`
-//   background: #FFD740;
-// `;
+const Button2 = styled(Button)`
+  background: #FFD740;
+`;
 
-// const Button3 = styled(Button)`
-//   background: #EEE;
-// `;
+const Button3 = styled(Button)`
+  background: #EEE;
+`;
 
-// const ButtonBox = styled.div`
-//   text-align: center;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-// `;
+const ButtonBox = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
-// // 로그인 컴포넌트
-// const Login: React.FC = () => {
-//   const navigate = useNavigate();
+// 로그인 컴포넌트
+const Login: React.FC = () => {
+  const navigate = useNavigate();
 
-//   const BackBtn: React.MouseEventHandler<HTMLButtonElement> = () => {
-//     navigate('/mainpage'); // 바로 이전 페이지로 이동
-//   };
+  const BackBtn: React.MouseEventHandler<HTMLButtonElement> = () => {
+    navigate('/main'); // 바로 이전 페이지로 이동
+  };
 
-//   return (
-//     <Container>
-//       <Whitebox>
-//         <Logo>
-//           <img src={logo} style={{ width: "100px" }} alt="logo" />
-//         </Logo>
+  return (
+    <Container>
+      <Whitebox>
+        <Logo>
+          <img src={logo} style={{ width: "100px" }} alt="logo" />
+        </Logo>
 
-//         <PreviousButton onClick={BackBtn}>X</PreviousButton>
+        <PreviousButton onClick={BackBtn}>X</PreviousButton>
 
-//         <ButtonBox>
-//           <Button1 color="#00C73C" textColor="#FFF">
-//             <img src={nlogo} alt="Naver logo" />
-//             <span>네이버로 간편 가입하기</span>
-//           </Button1>
-//           <Button2 color="#FFD740" textColor="#424242">
-//             <img src={klogo} alt="Kakao logo" />
-//             <span>카카오로 간편 가입하기</span>
-//           </Button2>
-//           <Button3 color="#EEE" textColor="#424242">
-//             <img src={glogo} alt="Google logo" />
-//             <span>구글로 가입하기</span>
-//           </Button3>
-//         </ButtonBox>
-//       </Whitebox>
-//     </Container>
-//   );
-// }
+        <ButtonBox>
+          <Button1 $color="#00C73C" $textColor="#FFF">
+            <img src={nlogo} alt="Naver logo" />
+            <span>네이버로 간편 가입하기</span>
+          </Button1>
+          <Button2 $color="#FFD740" $textColor="#424242">
+            <img src={klogo} alt="Kakao logo" />
+            <span>카카오로 간편 가입하기</span>
+          </Button2>
+          <Button3 $color="#EEE" $textColor="#424242">
+            <img src={glogo} alt="Google logo" />
+            <span>구글로 가입하기</span>
+          </Button3>
+        </ButtonBox>
+      </Whitebox>
+    </Container>
+  );
+}
 
-// export default Login;
+export default Login;
