@@ -4,7 +4,7 @@ import {ConfirmButton} from "./App.tsx";
 import styled, {css} from "styled-components"
 import { useNavigate } from "react-router-dom";
 
-// Container 스타일을 styled.div로 생성합니다.
+// Container 스타일을 styled.div로 생성
 const Container = styled.div`
   background: linear-gradient(118deg, #EB7125 0%, #CB4E00 100.36%);
   width: 100vw;

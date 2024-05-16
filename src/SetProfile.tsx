@@ -2,22 +2,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DropMPro from './DropMPro';
-import Modal from 'react-modal';
-
-// 이미지 임포트 시 타입 지정 필요
 import defaultProfileImg from 'src/basic.svg';
 import buttonimg from 'src/button.svg';
+import styled, {css} from "styled-components"
 
-// 스타일 모듈 임포트 시 타입 정의 필요
-import { styles } from "src/components/logindetail/style";
-
-// 상태 및 함수 파라미터 타입 정의
 interface ProfileImgType {
   src: string;
   alt: string;
 }
 
-function Profile(): JSX.Element {
+function SetProfile(): JSX.Element {
   const navigate = useNavigate();
   const [IsComplete, setIsComplete] = useState<boolean>(false);
   const [profileimg, setProfileImg] = useState<string>(defaultProfileImg);
@@ -60,47 +54,10 @@ function Profile(): JSX.Element {
             {isOpen && <DropMPro onProfileChange={handleProfileChange} />}
           </div>
           <button style={styles.nextButton} onClick={handleNextButtonClick}>설정완료</button>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={handleModalClose}
-            style={{
-              overlay: {
-                backgroundColor:"transparent",
-              },
-              content: {
-                boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.75)',
-                borderRadius:"20px",
-                backgroundColor:"#EB7125",
-                color:"white",
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: "center",
-                fontFamily: "Pretendard",
-                fontSize: "20px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "normal",
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                transform: 'translate(-50%, -50%)',
-                width:"276px",
-                height:"362px",
-                border:"none"
-              },
-            }}
-          >
-            <div>
-              <h4 style={{marginTop:"30%", fontSize:"20px"}}>큐피에 오신 것을</h4>
-              <span style={{fontFamily: "Pretendard", fontSize: "20px", fontStyle: "normal", fontWeight: 500, lineHeight: "normal"}}>진심으로 환영합니다!</span>
-              <button onClick={handleModalClose} style={styles.Qbutton}>질문보러 가기</button>
-            </div>
-          </Modal>
         </div>
       </div>
     </div>
   );
 }
 
-export default Profile;
+export default SetProfile;
