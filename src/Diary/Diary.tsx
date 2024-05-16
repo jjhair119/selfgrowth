@@ -17,7 +17,7 @@ import WeatherArea from "./components/WeatherArea.tsx";
 interface DiaryProps {
   year: number;
   month: number;
-  day: number;
+  day?: number;
   setCurrentView: (view: CalendarView) => void;
 }
 

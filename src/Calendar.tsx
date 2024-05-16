@@ -1,8 +1,8 @@
 import styled, {css} from "styled-components"
 import {useEffect, useState} from "react";
 import {ConfirmButton} from "./App.tsx";
-import Diary from "./Diary.tsx";
-import { useNavigate } from 'react-router-dom';
+import Diary from "./Diary/Diary.tsx";
+//import { useNavigate } from 'react-router-dom';
 
 const CalendarWrap = styled.div`
 
