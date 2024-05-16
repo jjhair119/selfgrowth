@@ -1,16 +1,9 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-interface ProfileProps {
-}
+interface ProfileProps {}
 
 const Profile: React.FC<ProfileProps> = () => {
+  return <div>Profile</div>;
+};
 
-
-    return (
-        <div>
-            Profile
-        </div>
-    )
-}
-
-export default Profile
+export default Profile;

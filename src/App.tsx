@@ -16,10 +16,10 @@ const Wrap = styled.div`
     height: 100vh;
 
     min-width: 870px;
-    
+
     align-items: center;
     justify-content: center;
-    
+
     flex-direction: column;
 `
 
@@ -28,7 +28,7 @@ const NavigationWrap = styled.div<{ $bgColor?: string }>`
     align-content: space-around;
     justify-content: center;
     align-items: center;
-    
+
     width: 100%;
     height: ${NAV_HEIGHT}px;
     box-sizing: border-box;
@@ -42,33 +42,33 @@ const MainContentWrap = styled.div`
 
 const ToolTip = styled.div`
     display: none;
-    
+
     position: absolute;
     top: 120%;
     left: 50%;
     transform: translateX(-50%);
-    
+
     width: max-content;
     height: min-content;
-    
+
     padding: 2px 6px;
     border-radius: 4px;
-    
+
     background: #FFD66C;
     color: black;
     font-weight: normal;
     font-size: 20px;
-    
+
     z-index: 100;
 `
 
 export const MainButton = styled.button<{$currentButton?:View}>`
     display: flex;
     position: relative;
-    
+
     align-items: center;
     vertical-align: center;
-    
+
     color:white;
     font-weight: bold;
     font-size: 28px;
@@ -79,7 +79,7 @@ export const MainButton = styled.button<{$currentButton?:View}>`
         transition: 0.5s;
         box-shadow: inset 0 0 10px #999;
     }
-    
+
     &:hover > ${ToolTip} {
         display: block;
     }
@@ -90,7 +90,7 @@ export const MainButton = styled.button<{$currentButton?:View}>`
     height: 52px;
     border-radius: 50px;
     border: none;
-    
+
     min-width: 132px;
 
     box-shadow: 1px 2px 4px 1px #999;
@@ -101,25 +101,25 @@ export const MainButton = styled.button<{$currentButton?:View}>`
 export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: number}>`
     display: flex;
     flex-grow: 1;
-    
+
     background: ${props => props.$bgColor};
-    
+
     ${props => css`
         background: ${props.$bgColor};
     `}
-    
+
     border-radius: 12px;
     border: none;
-    
+
     width: fit-content;
     height: min-content;
     padding: 10px 32px;
     margin: 28px 14px 0 20px;
-    
+
     color: black;
     font-weight: bold;
     font-size: 24px;
-    
+
     justify-content: center;
 
     ${(props) => props.$isSelected && css`
