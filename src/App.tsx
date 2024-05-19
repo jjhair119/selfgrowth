@@ -3,7 +3,10 @@ import styled, {css} from "styled-components"
 import Home from "./Home.tsx";
 import Profile from "./Profile.tsx";
 import Calendar from "./Calendar.tsx";
-
+import Login from "./Login.tsx";
+import SetProfile from "./SetProfile.tsx";
+import Nickname from "./Nickname.tsx";
+import Auth from "./Auth.tsx";
 export type View = "HOME" | "DIARY" | "PROFILE";
 
 const Wrap = styled.div`

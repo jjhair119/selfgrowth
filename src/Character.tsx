@@ -34,7 +34,7 @@ const PreviousButton = styled.button`
   justify-content: center;
   color: rgba(158, 158, 158, 0.63);
   text-align: center;
-  font-family: NanumSquare;
+  font-family: Inter;
   font-size: 70px;
   font-style: normal;
   font-weight: 400;
