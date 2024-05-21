@@ -1,9 +1,9 @@
-import {useState} from 'react'
 import styled, {css} from "styled-components"
 import Home from "./Home.tsx";
 import Profile from "./Profile.tsx";
-import Calendar from "./Calendar.tsx";
+import CalendarScreen from "./CalendarScreen.tsx";
 import "./App.css";
+import {Link, Route, Routes} from "react-router-dom";
 
 export type View = "HOME" | "DIARY" | "PROFILE";
 
@@ -129,34 +129,34 @@ export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: nu
 `
 
 function App() {
-    const [currentView, setCurrentView] = useState<View>("HOME");
-
     return (
         <Wrap>
             <NavigationWrap>
-                <MainButton $currentButton="HOME" onClick={() => setCurrentView("HOME")}>
-                    <div>home</div>
-                    <ToolTip>🐾 홈화면으로 이동</ToolTip>
-                </MainButton>
-                <MainButton $currentButton="DIARY" onClick={() => setCurrentView("DIARY")}>
-                    <div>diary</div>
-                    <ToolTip>🐾 일기 작성하러 가기</ToolTip>
-                </MainButton>
-                <MainButton $currentButton="PROFILE" onClick={() => setCurrentView("PROFILE")}>
-                    <div>profile</div>
-                    <ToolTip>🐾 마이 페이지 이동</ToolTip>
-                </MainButton>
+                <Link to="/home">
+                    <MainButton $currentButton="HOME">
+                        <div>home</div>
+                        <ToolTip>🐾 홈화면으로 이동</ToolTip>
+                    </MainButton>
+                </Link>
+                <Link to="/calendar">
+                    <MainButton $currentButton="DIARY">
+                        <div>diary</div>
+                        <ToolTip>🐾 일기 작성하러 가기</ToolTip>
+                    </MainButton>
+                </Link>
+                <Link to="/profile">
+                    <MainButton $currentButton="PROFILE">
+                        <div>profile</div>
+                        <ToolTip>🐾 마이 페이지 이동</ToolTip>
+                    </MainButton>
+                </Link>
             </NavigationWrap>
             <MainContentWrap>
-                {
-                    currentView === "HOME" && <Home></Home>
-                }
-                {
-                    currentView === "DIARY" && <Calendar></Calendar>
-                }
-                {
-                    currentView === "PROFILE" && <Profile></Profile>
-                }
+                <Routes>
+                    <Route path='/home' element={<Home></Home>} />
+                    <Route path='/calendar' element={<CalendarScreen></CalendarScreen>} />
+                    <Route path='/profile' element={<Profile></Profile>} />
+                </Routes>
             </MainContentWrap>
         </Wrap>
     )

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { CalendarView } from "../Calendar.tsx";
+import { CalendarView } from "../CalendarScreen.tsx";
 import DiaryPop from "./components/DiaryPop.tsx";
 import Date from "./components/Date.tsx";
 import TitleArea from "./components/TitleArea.tsx";
@@ -13,12 +13,12 @@ import TextBox from "./components/WriteDiary.tsx";
 import SaveButton from "./components/SaveButton.tsx";
 import Weather from "./components/Weather.tsx";
 import WeatherArea from "./components/WeatherArea.tsx";
+import {Link} from "react-router-dom";
 
 interface DiaryProps {
   year: number;
   month: number;
   day?: number;
-  setCurrentView: (view: CalendarView) => void;
 }
 
 const Comment = styled.div`
@@ -38,7 +38,7 @@ const Comment = styled.div`
 `;
 
 
-const Diary: React.FC<DiaryProps> = ({ year, month, day, setCurrentView }) => {
+const Diary: React.FC<DiaryProps> = ({ year, month, day }) => {
   const [text, setText] = useState<string>("");
   const [savedText, setSavedText] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -64,7 +64,9 @@ ex) 오늘 하늘이 너무 맑아서 기분이 좋았다.
 
   return (
     <DiaryWrap>
-      <Buttons onClick={() => setCurrentView("CALENDAR")}>back</Buttons>
+      <Link to="/calendar">
+        <Buttons>back</Buttons>
+      </Link>
       <DiaryPop>
         <Date>
           {year}/{month + 1}/{day}
