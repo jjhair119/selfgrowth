@@ -1,8 +1,8 @@
 //@ts-nocheck
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import defaultProfileImg from 'src/basic.svg';
-import buttonimg from 'src/button.svg';
+import defaultProfileImg from './basic.svg';
+import buttonimg from './button.svg';
 import styled, {css} from "styled-components"
 
 interface ProfileImgType {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
 
-const Myprofile = () => {
+const MyProfile = () => {
   //프로필 수정버튼
   const [isModifyVisible, setModifyVisible] = useState(true);
   const [isProeditVisible, setProeditVisible] = useState(false);
@@ -327,4 +327,4 @@ const Myprofile = () => {
     </>
   );
 };
-export default Myprofile;
+export default MyProfile;
