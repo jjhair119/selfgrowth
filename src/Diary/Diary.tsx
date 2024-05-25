@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { CalendarView } from "../CalendarScreen.tsx";
 import DiaryPop from "./components/DiaryPop.tsx";
 import Date from "./components/Date.tsx";
 import TitleArea from "./components/TitleArea.tsx";
@@ -39,6 +38,8 @@ const Comment = styled.div`
 
 
 const Diary: React.FC<DiaryProps> = ({ year, month, day }) => {
+  console.log("Diary component loaded with date:", year, month, day);
+
   const [text, setText] = useState<string>("");
   const [savedText, setSavedText] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);

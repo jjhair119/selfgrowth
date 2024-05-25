@@ -232,7 +232,7 @@ const Calendar: React.FC<CalendarProps> = ({currentYear, currentMonth, selectedD
     return <><CalendarView>
         <HeaderWrap>
             <ChangeMonthButton onClick={() => onClickPrevious()}>&lt;</ChangeMonthButton>
-            <div style={{height: 64, fontSize: 24, fontWeight: "bolder"}}>
+            <div style={{ height: 64, fontSize: 24, fontWeight: "bolder" }}>
                 {monthNames[currentMonth]} {currentYear}
             </div>
             <ChangeMonthButton onClick={() => onClickNext()}>&gt;</ChangeMonthButton>
@@ -252,12 +252,12 @@ const Calendar: React.FC<CalendarProps> = ({currentYear, currentMonth, selectedD
             </DayWrap>
         </CalendarWeek>
         <ConfirmButtonWrap>
-            <Link to="/calendar/diary">
+            <Link to="diary" onClick={() => console.log("Navigating to diary")}>
                 <ConfirmButton $bgColor={"#e6e6e6"} $isSelected={selectedDay}>apply</ConfirmButton>
             </Link>
         </ConfirmButtonWrap>
     </CalendarView>
-        <div style={{marginTop: 32}}>💡 일기를 작성할 날짜를 선택해주세요</div>
+        <div style={{ marginTop: 32 }}>💡 일기를 작성할 날짜를 선택해주세요</div>
     </>
 
 }

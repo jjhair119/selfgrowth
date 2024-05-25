@@ -154,7 +154,7 @@ function App() {
             <MainContentWrap>
                 <Routes>
                     <Route path='/home' element={<Home></Home>} />
-                    <Route path='/calendar' element={<CalendarScreen></CalendarScreen>} />
+                    <Route path='/calendar/*' element={<CalendarScreen></CalendarScreen>} />
                     <Route path='/profile' element={<Profile></Profile>} />
                 </Routes>
             </MainContentWrap>
