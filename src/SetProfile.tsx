@@ -19,6 +19,55 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const PageTitle = styled.h1`
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  position: absolute;
+  margin-top: 20%;
+`;
+
+const NextButton = styled.button`
+  position: absolute;
+  border: none;
+  margin-top: 1150px;
+  width: 300px;
+  height: 77px;
+  border-radius: 40px;
+  background: #FFD66C;
+  cursor: poInter;
+  color: #000000;
+  text-align: center;
+  font-size: 30px;
+  font-style: normal;
+  font-family: Inter;
+  font-weight: 600;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+const WhiteBox = styled.div`
+  border-radius: 20px;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 86.25%;
+  height: 81.54%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const ButtonBox = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Previous2 = styled.button`
   border: none;
   background-color: transparent;
@@ -44,8 +93,9 @@ const Previous2 = styled.button`
 const ButtonImg = styled.img`
   cursor: pointer;
   position: relative;
-  left: 121%;
-  top: 75px;
+  margin-left: 50%;
+  margin-top: -90%;
+  height: 120px;
 `;
 
 const SetProfileContainer = styled.div`
@@ -54,59 +104,8 @@ const SetProfileContainer = styled.div`
 `;
 
 const DefaultProfileImg = styled.img`
-  position: absolute;
-  left: -80%;
-  top: -80%;
-  width: 192px;
-  height: 197px;
-`;
-
-const PageTitle = styled.h1`
-  color: #000;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  position: absolute;
-  margin-top: 20%;
-`;
-
-const NextButton = styled.button`
-  position: absolute;
-  border: none;
-  margin-top: 1035px;
-  width: 324px;
-  height: 77px;
-  border-radius: 40px;
-  background: #FFD66C;
-  cursor: pointer;
-  color: #FFF;
-  text-align: center;
-  font-size: 40px;
-  font-style: normal;
-  font-family: Pretendard;
-  font-weight: 500;
-`;
-
-const WhiteBox = styled.div`
-  border-radius: 20px;
-  background: #FFF;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  width: 86.25%;
-  height: 81.54%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const ButtonBox = styled.div`
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 230px;
+  margin-top:80px;
 `;
 
 function SetProfile(): JSX.Element {
@@ -115,7 +114,7 @@ function SetProfile(): JSX.Element {
   const [profileimg, setProfileImg] = useState<string>(defaultProfileImg);
 
   const BackBtn = (): void => {
-    navigate('/login'); // 바로 이전 페이지로 이동
+    navigate('/nickname'); // 바로 이전 페이지로 이동
   };
 
   const handleProfileChange = (newProfileImg: string): void => {
@@ -125,7 +124,7 @@ function SetProfile(): JSX.Element {
   
   const handleNextButtonClick = (): void => {
     if (IsComplete) {
-      navigate('/nickname');
+      navigate('/character');
     }
   }
 
