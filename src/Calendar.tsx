@@ -1,6 +1,6 @@
 import styled, {css} from "styled-components"
 import {useEffect} from "react";
-import {ConfirmButton} from "./App.tsx";
+//import {ConfirmButton} from "./App.tsx";
 import {Link} from "react-router-dom";
 
 const CalendarView = styled.div`
@@ -142,6 +142,36 @@ const ChangeMonthButton = styled.div`
     font-weight: bolder;
 
     margin: 0 18px;
+`
+
+export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: number}>`
+    display: flex;
+    flex-grow: 1;
+
+    background: ${props => props.$bgColor};
+
+    ${props => css`
+        background: ${props.$bgColor};
+    `}
+
+    border-radius: 12px;
+    border: none;
+
+    width: fit-content;
+    height: min-content;
+    padding: 10px 32px;
+    margin: 28px 14px 0 20px;
+
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+
+    justify-content: center;
+
+    ${(props) => props.$isSelected && css`
+        background: #E95C42;
+        color: white;
+    `}
 `
 
 interface CalendarProps {
