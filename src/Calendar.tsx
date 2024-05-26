@@ -1,8 +1,8 @@
 import styled, {css} from "styled-components"
+import {ConfirmButton} from "./App.tsx";
+import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-// import {ConfirmButton} from "./App.tsx";
 import Diary from "./Diary/Diary.tsx";
-//import { useNavigate } from 'react-router-dom';
 
 const CalendarWrap = styled.div`
 
@@ -163,48 +163,21 @@ const ChangeMonthButton = styled.div`
     margin: 0 18px;
 `
 
-const PreviousButton = styled.div`
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    position: absolute;
-    top: 32px;
-    right: 32px;
-
-    width: 60px;
-    height: 60px;
-
-    color: #9E9E9E;
-    font-size: 70px;
-    font-weight: bolder;
-`
-
 interface CalendarProps {
+    currentYear : number,
+    currentMonth : number,
+    selectedDay? : number,
+    setCurrentYear : (Number:number) => void,
+    setCurrentMonth : (Number:number) => void,
+    setSelectedDay : (Number?:number) => void,
 }
 
-export type CalendarView = "CALENDAR" | "DIARY";
+const Calendar: React.FC<CalendarProps> = ({currentYear, currentMonth, selectedDay, setCurrentYear, setCurrentMonth, setSelectedDay}) => {
 
-
-//state로 저장해야할게
-//currentMonth (YYYYMM)
-//선택한 날짜 Dayjs | undefined
-const Calendar: React.FC<CalendarProps> = () => {
     //달 영문 표기용
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
-
-    //날짜 선언
-    const currentDate = new Date();
-    const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
-    const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
-    const [selectedDay, setSelectedDay] = useState<number>();
-
-    //calendar, diary 중 현재 view 구분
-    const [currentView, setCurrentView] = useState<CalendarView>("CALENDAR");
-
 
     //날짜 선택
     const handleDate = (currentDay: number) => {
@@ -226,8 +199,8 @@ const Calendar: React.FC<CalendarProps> = () => {
 
     //날짜 처리
     const days = Array.from({length: days_n}, (_, index) => (
-        <CalendarDayButton className="calendar-day fill" key={`day-${index}`} onClick={() => handleDate(index+1)}
-                           $selectedDay={selectedDay} $self={index+1}>
+        <CalendarDayButton className="calendar-day fill" key={`day-${index}`} onClick={() => handleDate(index + 1)}
+                           $selectedDay={selectedDay} $self={index + 1}>
             {index + 1}
         </CalendarDayButton>
     ));
@@ -253,13 +226,6 @@ const Calendar: React.FC<CalendarProps> = () => {
         </WeekWrap>
     ));
 
-    //날짜 선택 후 Diary로 이동
-    const onClickApply = () => {
-        if (selectedDay) {
-            setCurrentView("DIARY");
-        }
-    }
-
     //이전 달로 이동
     const onClickPrevious = () => {
         const updatedMonth = currentMonth === 0 ? 11 : currentMonth - 1;
@@ -280,56 +246,39 @@ const Calendar: React.FC<CalendarProps> = () => {
         setSelectedDay(undefined);
     }, [currentMonth]);
 
-    //const navigate = useNavigate();
 
-    //이전 페이지로 돌아가기
-    //라우팅이 안되어있어서 작동 x -> 라우팅 작업 필요함...
-    const onClickPreviousButton = () => {
-        //navigate(-1);
-        console.log("이전 페이지로")
-    }
 
-    return <CalendarWrap>
-        <PreviousButton onClick={onClickPreviousButton}>X</PreviousButton>
-        {
-            currentView == "CALENDAR" && <><CalendarView>
-                <HeaderWrap>
-                    <ChangeMonthButton onClick={() => onClickPrevious()}>&lt;</ChangeMonthButton>
-                    <div style={{height: 64, fontSize: 24, fontWeight: "bolder"}}>
-                        {monthNames[currentMonth]} {currentYear}
-                    </div>
-                    <ChangeMonthButton onClick={() => onClickNext()}>&gt;</ChangeMonthButton>
-                </HeaderWrap>
-                <CalendarHeader>
-                    <a>Sun</a>
-                    <a>Mon</a>
-                    <a>Tue</a>
-                    <a>Wed</a>
-                    <a>Thu</a>
-                    <a>Fri</a>
-                    <a>Sat</a>
-                </CalendarHeader>
-                <CalendarWeek>
-                    <DayWrap>
-                        {weeks}
-                    </DayWrap>
-                </CalendarWeek>
-                <ConfirmButtonWrap>
-                    <ConfirmButton $bgColor={"#e6e6e6"} $isSelected={selectedDay}
-                                   onClick={() => onClickApply()}>apply</ConfirmButton>
-                </ConfirmButtonWrap>
+    return <><CalendarView>
+        <HeaderWrap>
+            <ChangeMonthButton onClick={() => onClickPrevious()}>&lt;</ChangeMonthButton>
+            <div style={{ height: 64, fontSize: 24, fontWeight: "bolder" }}>
+                {monthNames[currentMonth]} {currentYear}
+            </div>
+            <ChangeMonthButton onClick={() => onClickNext()}>&gt;</ChangeMonthButton>
+        </HeaderWrap>
+        <CalendarHeader>
+            <a>Sun</a>
+            <a>Mon</a>
+            <a>Tue</a>
+            <a>Wed</a>
+            <a>Thu</a>
+            <a>Fri</a>
+            <a>Sat</a>
+        </CalendarHeader>
+        <CalendarWeek>
+            <DayWrap>
+                {weeks}
+            </DayWrap>
+        </CalendarWeek>
+        <ConfirmButtonWrap>
+            <Link to="diary" onClick={() => console.log("Navigating to diary")}>
+                <ConfirmButton $bgColor={"#e6e6e6"} $isSelected={selectedDay}>apply</ConfirmButton>
+            </Link>
+        </ConfirmButtonWrap>
+    </CalendarView>
+        <div style={{ marginTop: 32 }}>💡 일기를 작성할 날짜를 선택해주세요</div>
+    </>
 
-            </CalendarView>
-                <div style={{marginTop: 32}}>💡 일기를 작성할 날짜를 선택해주세요</div>
-            </>
-        }
-        {
-            currentView == "DIARY" && <Diary
-                year={currentYear} month={currentMonth} day={selectedDay}
-                setCurrentView={setCurrentView}
-            ></Diary>
-        }
-    </CalendarWrap>
 }
 
 export default Calendar
