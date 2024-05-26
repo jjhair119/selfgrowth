@@ -10,7 +10,7 @@ import SetProfile from "./SetProfile.tsx";
 import Character from "./Character.tsx";
 import Auth from "./Auth.tsx";
 import MyProfile from "./MyProfile.tsx";
-// export type View = "HOME" | "DIARY" | "PROFILE";
+export type View = "HOME" | "DIARY" | "PROFILE";
 
 // //navigation 높이
 // export const NAV_HEIGHT = 160;
@@ -178,6 +178,12 @@ const MainRouter = () => {
               <Route path="/SetProfile" element={<SetProfile />} />
               <Route path="/Nickname" element={<Nickname />} />
               <Route path="/Character" element={<Character />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/auth/kakao/login" element={<Auth />} />
+              {/* 정의되지 않은 경로에 접근시 해당 페이지로 이동*/}
+              <Route path="*" element={<Nickname />} />
         </Routes>
   );
 };
@@ -196,3 +202,47 @@ if ('serviceWorker' in navigator) {
 }
 
 export default MainRouter;
+
+// import {useState} from 'react'
+// import styled, {css} from "styled-components"
+// import Home from "./Home.tsx";
+// import Profile from "./Profile.tsx";
+// import Calendar from "./Calendar.tsx";
+// import "./App.css";
+// import Login from "./Login.tsx";
+// import Nickname from "./Nickname.tsx";
+// import SetProfile from "./SetProfile.tsx";
+// import Character from "./Character.tsx";
+// import Auth from "./Auth.tsx";
+// import MyProfile from "./MyProfile.tsx";
+// import React from 'react';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// const MainRouter = () => {
+//     return (
+//         <Routes>
+//               <Route path="/" element={<Login />} />
+//               <Route path="/home" element={<Home />} />
+//               <Route path="calendar" element={<Calendar />} />
+//               <Route path="profile" element={<MyProfile />} />
+//               <Route path="/SetProfile" element={<SetProfile />} />
+//               <Route path="/Nickname" element={<Nickname />} />
+//               <Route path="/Character" element={<Character />} />
+//         </Routes>
+//   );
+// };
+
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker
+//       .register('/service-worker.js', { type: 'classic' })
+//       .then((registration) => {
+//         console.log('SW registered: ', registration);
+//       })
+//       .catch((registrationError) => {
+//         console.log('SW registration failed: ', registrationError);
+//       });
+//   });
+// }
+
+// export default MainRouter;

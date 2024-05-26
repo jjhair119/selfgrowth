@@ -1,13 +1,55 @@
 // //@ts-nocheck
 // //로그인페이지1
-import  React from "react";
-import { useNavigate } from 'react-router-dom';
-import styled from "styled-components";
-import logo from "./logo.svg";
-import nlogo from "./naver.svg";
-import klogo from "./kakao.svg";
-import glogo from "./google.svg";
-  
+// import  React from "react";
+// import { useNavigate } from 'react-router-dom';
+// import styled from "styled-components";
+// import logo from "./logo.svg";
+// import nlogo from "./naver.svg";
+// import klogo from "./kakao.svg";
+// import glogo from "./google.svg";
+
+// //window객체에 Kakao라는 객체가 존재한다고 알려주는 변수
+// const kakao = (window as any).Kakako;
+// // 로그인 컴포넌트
+// const Login: React.FC = () => {
+//   const navigate = useNavigate();
+
+//   const BackBtn: React.MouseEventHandler<HTMLButtonElement> = () => {
+//     navigate('/home'); // 바로 이전 페이지로 이동
+//   };
+
+//   return (
+//     <Container>
+//       <Whitebox>
+//         <Logo>
+//           <img src={logo} style={{ width: "100px" }} alt="logo" />
+//         </Logo>
+
+//         <PreviousButton onClick={BackBtn}>X</PreviousButton>
+
+//         <ButtonBox>
+//           <Button1 $color="#00C73C" $textColor="#FFF">
+//             <img src={nlogo} alt="Naver logo" />
+//             <span>네이버로 간편 가입하기</span>
+//           </Button1>
+//           <Button2 $color="#FFD740" $textColor="#424242">
+//             <img src={klogo} alt="Kakao logo" onClick={()=>kakao.Auth.authorize({
+//               redirectUril:"${url}",
+//               scopre: "profile_nickname,profile_image,account_email",
+//             })}/>
+//             <span>카카오로 간편 가입하기</span>
+//           </Button2>
+//           <Button3 $color="#EEE" $textColor="#424242">
+//             <img src={glogo} alt="Google logo" />
+//             <span>구글로 가입하기</span>
+//           </Button3>
+//         </ButtonBox>
+//       </Whitebox>
+//     </Container>
+//   );
+// }
+
+// export default Login;
 // 스타일드 컴포넌트 정의
 const Container = styled.div`
   background: #FFD66C;
@@ -51,8 +93,7 @@ const PreviousButton = styled.button`
 `;
 
 const Logo = styled.div`
-  padding: 5%;
-  margin: 5%;
+  margin: 7%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,14 +131,17 @@ const Button = styled.button<{$color?: string, $textColor?: string}>`
 // Button 컴포넌트에 적용할 각각의 색상
 const Button1 = styled(Button)`
   background: #00C73C;
+  cursor: pointer;
 `;
 
 const Button2 = styled(Button)`
   background: #FFD740;
+  cursor: pointer;
 `;
 
 const Button3 = styled(Button)`
   background: #EEE;
+  cursor: pointer;
 `;
 
 const ButtonBox = styled.div`
@@ -108,12 +152,34 @@ const ButtonBox = styled.div`
   justify-content: center;
 `;
 
+import React from "react";
+import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import logo from "./logo.svg";
+import nlogo from "./naver.svg";
+import klogo from "./kakao.svg";
+import glogo from "./google.svg";
+
+//window객체에 Kakao라는 객체가 존재한다고 알려주는 변수
+const kakao = (window as any).Kakao;
+
 // 로그인 컴포넌트
 const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const BackBtn: React.MouseEventHandler<HTMLButtonElement> = () => {
-    navigate('/main'); // 바로 이전 페이지로 이동
+    navigate('/home'); // 바로 이전 페이지로 이동
+  };
+
+  useEffect(() => {
+    if (!kakao.isInitialized()) {
+      kakao.init('b33b03136b166b263f1cff4fbe79091b'); // 여기에 실제 앱 키를 입력하세요.
+    }
+  }, []);
+
+  const handleKakaoLogin = () => {
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'b33b03136b166b263f1cff4fbe79091b'}&redirect_uri=${window.location.href + 'auth/kakao/login'}`;
   };
 
   return (
@@ -130,8 +196,8 @@ const Login: React.FC = () => {
             <img src={nlogo} alt="Naver logo" />
             <span>네이버로 간편 가입하기</span>
           </Button1>
-          <Button2 $color="#FFD740" $textColor="#424242">
-            <img src={klogo} alt="Kakao logo" />
+          <Button2 $color="#FFD740" $textColor="#424242" onClick={handleKakaoLogin}>
+            <img src={klogo} alt="Kakao logo" style={{ marginRight: "28%" }} />
             <span>카카오로 간편 가입하기</span>
           </Button2>
           <Button3 $color="#EEE" $textColor="#424242">

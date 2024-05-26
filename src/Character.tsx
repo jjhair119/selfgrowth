@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import h1 from "./h1.svg";
@@ -9,6 +9,79 @@ import d1 from "./d1.svg";
 import d2 from "./d2.svg";
 import d3 from "./d3.svg";
 import d4 from "./d4.svg";
+
+const imageMap: { [key: string]: string } = {
+  d1: h1,
+  d2: h2,
+  d3: h3,
+  d4: h4
+};
+
+const originalImages: SelectedImage = {
+  d1: d1,
+  d2: d2,
+  d3: d3,
+  d4: d4
+};
+
+interface SelectedImage {
+  d1: string;
+  d2: string;
+  d3: string;
+  d4: string;
+}
+
+function Character(): JSX.Element {
+  const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<SelectedImage>(originalImages);
+  const [isImageSelected, setIsImageSelected] = useState<boolean>(false);
+
+  const handleNextButtonClick = (): void => {
+    navigate('/home');
+  };
+
+  const BackBtn = (): void => {
+    navigate(-1); // 바로 이전 페이지로 이동
+  };
+
+  const handleImageClick = (imageId: keyof SelectedImage) => {
+    const newImage = selectedImage[imageId] === originalImages[imageId] ? imageMap[imageId] : originalImages[imageId];
+    const newImages = { ...selectedImage, [imageId]: newImage };
+    setSelectedImage(newImages);
+  };
+
+  useEffect(() => {
+    const isAnyImageSelected = Object.values(selectedImage).some(image => Object.values(imageMap).includes(image));
+    setIsImageSelected(isAnyImageSelected);
+  }, [selectedImage]);
+
+  return (
+    <Container>
+      <WhiteBox>
+        <ButtonBox>
+          <PageTitle>캐릭터 설정</PageTitle>
+          <PreviousButton onClick={BackBtn}>←</PreviousButton>
+          <h5 style={{ margin:"30px", fontFamily: "Inter", fontSize: "20px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" }}>
+            나의 첫 캐릭터를 선택해주세요!
+          </h5>
+
+          <div style={{margin: "30px 0px 0px 0px"}}>
+            <img src={selectedImage.d1} onClick={() => handleImageClick('d1')} style={{ cursor: 'pointer' }} alt="d1" />
+            <img src={selectedImage.d2} onClick={() => handleImageClick('d2')} style={{ cursor: 'pointer' }} alt="d2" />
+            <img src={selectedImage.d3} onClick={() => handleImageClick('d3')} style={{ cursor: 'pointer' }} alt="d3" />
+            <img src={selectedImage.d4} onClick={() => handleImageClick('d4')} style={{ cursor: 'pointer' }} alt="d4" />
+          </div>
+
+          <NextButton disabled={!isImageSelected} isImageSelected={isImageSelected} onClick={handleNextButtonClick}>
+            {isImageSelected ? "설정완료" : "캐릭터를 선택해주세요"}
+          </NextButton>
+        </ButtonBox>
+      </WhiteBox>
+    </Container>
+  );
+}
+
+export default Character;
 
 // Container 스타일을 styled.div로 생성
 const Container = styled.div`
@@ -41,34 +114,33 @@ const PreviousButton = styled.button`
   line-height: normal;
   cursor: pointer;
 `;
-
 const PageTitle = styled.h1`
   color: #000;
+  margin-bottom : 0;
   text-align: center;
   font-family: Inter;
-  font-size: 48px;
+  font-size: 50px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
-  position: absolute;
-  margin-top: 20%;
+  margin-top: 13%;
 `;
 
-const NextButton = styled.button`
-  position: absolute;
+const NextButton = styled.button<{ isImageSelected: boolean }>`
   border: none;
-  margin-top: 1035px;
-  width: 324px;
+  margin-top: 60px;
+  background-color: ${({ isImageSelected }) => isImageSelected ? "#FFD66C" : "#F8EFD8"};
+  color: ${({ isImageSelected }) => isImageSelected ? "black" : "gray"};
+  width: ${({ isImageSelected }) => isImageSelected ? "300px" : "400px"};
   height: 77px;
   border-radius: 40px;
-  background: #FFD66C;
-  cursor: pointer;
-  color: #000000;
+  cursor: poInter;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   font-style: normal;
   font-family: Inter;
-  font-weight: 500;
+  font-weight: ${({ isImageSelected }) => isImageSelected ? "600" : "400"};
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
 const WhiteBox = styled.div`
@@ -89,43 +161,3 @@ const ButtonBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-function Character(): JSX.Element {
-  const navigate = useNavigate();
-  const [selectedImage, setSelectedImage] = useState({d1, d2, d3, d4});
-
-  const handleNextButtonClick = (): void => {
-      navigate('/main');
-  };
-
-  const BackBtn = (): void => {
-    navigate(-1); // 바로 이전 페이지로 이동
-  };
-
-  const handleImageClick = (imageId: string) => {
-    const newImages = {...selectedImage, [imageId]: eval(imageId.replace('d', 'h'))}; // eval 사용은 보안 문제로 권장되지 않으나 예시를 위해 사용
-    setSelectedImage(newImages);
-  }
-
-  return (
-    <Container>
-      <WhiteBox> 
-        <ButtonBox>
-          <PageTitle>캐릭터 설정</PageTitle>
-          <PreviousButton onClick={BackBtn}>←</PreviousButton>
-          <h5 style={{ position: "absolute", top: "275px", fontFamily: "Inter", fontSize: "20px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" }}>초기 캐릭터를 선택해주세요 !</h5>
-
-          <div>
-            <img src={selectedImage.d1} onClick={() => handleImageClick('d1')} style={{cursor: 'pointer'}}></img>
-            <img src={selectedImage.d2} onClick={() => handleImageClick('d2')} style={{cursor: 'pointer'}}></img>
-            <img src={selectedImage.d3} onClick={() => handleImageClick('d3')} style={{cursor: 'pointer'}}></img>
-            <img src={selectedImage.d4} onClick={() => handleImageClick('d4')} style={{cursor: 'pointer'}}></img>
-          </div>
-          <NextButton onClick={handleNextButtonClick}>설정완료</NextButton>
-        </ButtonBox>
-      </WhiteBox>
-    </Container>
-  );
-}
-
-export default Character;

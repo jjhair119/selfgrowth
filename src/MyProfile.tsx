@@ -1,4 +1,5 @@
 // @ts-nocheck
+//마이페이지 컴포넌트
 import React, { useState, useEffect } from 'react';
 
 const MyProfile = () => {
