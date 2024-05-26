@@ -1,7 +1,26 @@
 import styled, {css} from "styled-components"
-import {useEffect} from "react";
 import {ConfirmButton} from "./App.tsx";
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import Diary from "./Diary/Diary.tsx";
+
+const CalendarWrap = styled.div`
+
+    display: flex;
+    vertical-align: center;
+    justify-content: center;
+    align-items: center;
+
+    background: #FFD66C;
+
+    padding: 128px;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+
+    position: relative;
+
+`
 
 const CalendarView = styled.div`
     display: flex;
