@@ -9,7 +9,6 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import Auth from "./Auth.tsx";
 import Nickname from "./Nickname.tsx";
 import Character from "./Character.tsx";
 import SetProfile from "./SetProfile.tsx";
