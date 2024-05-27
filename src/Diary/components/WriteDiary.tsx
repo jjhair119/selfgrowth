@@ -12,13 +12,17 @@ const WriteDiary = styled.textarea`
 
   color: #000;
   padding: 16px 16px 16px 16px;
-  width: 600px;
-  height: 353.805px;
+  width: 650px;
+  height: 120px;
   border: none;
   background-color: transparent;
 
   flex-direction: column;
   flex-shrink: 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &:focus {
     outline: none;

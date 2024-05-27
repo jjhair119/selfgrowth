@@ -3,9 +3,7 @@ import ToolTipDiv from "../../components/ToolTip";
 import { View } from "../../App";
 
 const Buttons = styled.button<{ $currentButton?: View }>`
-  
-  position: absolute;
-  top: 31%;
+
 
   align-items: center;
   vertical-align: center;
@@ -26,7 +24,7 @@ const Buttons = styled.button<{ $currentButton?: View }>`
   }
 
   padding: 8px 16px;
-  margin: 0 64px;
+  margin-bottom: 0 64px;
   width: 152px;
   height: 52px;
   border-radius: 50px;

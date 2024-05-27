@@ -13,7 +13,7 @@ const DiaryPop = styled.div`
   flex-grow: 0;
 
   width: 100%;
-  height: 70%;
+  height: %;
 
   padding: 34px;
   border-radius: 32px;

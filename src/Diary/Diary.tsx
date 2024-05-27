@@ -13,6 +13,8 @@ import TextBox from "./components/WriteDiary.tsx";
 import SaveButton from "./components/SaveButton.tsx";
 import Weather from "./components/Weather.tsx";
 import WeatherArea from "./components/WeatherArea.tsx";
+import DiaryImage from "./components/DiaryImage.tsx";
+import axios from "axios";
 
 interface DiaryProps {
   year: number;
@@ -37,10 +39,10 @@ const Comment = styled.div`
   line-height: normal;
 `;
 
-
 const Diary: React.FC<DiaryProps> = ({ year, month, day, setCurrentView }) => {
   const [text, setText] = useState<string>("");
   const [savedText, setSavedText] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>(""); // 이미지 URL 상태 추가
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const defaultText = `오늘의 하루를 기록해주세요 !
@@ -53,9 +55,21 @@ ex) 오늘 하늘이 너무 맑아서 기분이 좋았다.
     setText(event.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setSavedText(text);
     setIsEditing(false);
+
+      axios
+        .post(
+          "https://port-0-rasingme-1ru12mlwbsd5mh.sel5.cloudtype.app/api/diariess",
+          { text: savedText }
+        )
+        .then((response) => {
+          console.log("저장 성공:", response.data);
+        })
+        .catch((error) => {
+          console.error("저장 실패:", error);
+        });
   };
 
   const handleEdit = () => {
@@ -81,6 +95,7 @@ ex) 오늘 하늘이 너무 맑아서 기분이 좋았다.
           <Weather>🌧️</Weather>
           <Weather>🌩️</Weather>
         </WeatherArea>
+        <DiaryImage></DiaryImage>
         <DiaryText>
           <TextBox
             text={isEditing ? text : savedText || defaultText}

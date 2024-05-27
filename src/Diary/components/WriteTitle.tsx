@@ -10,10 +10,9 @@ const TitleStyle = styled.input`
   line-height: 18px;
 
   display: flex;
-  width: 240px;
+  width: 250px;
 
   color: #000;
-  text-align: center;
   margin-top: 17px;
   margin-bottom: 16px;
   border: none;
