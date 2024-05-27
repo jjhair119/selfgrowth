@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import h1 from "./h1.svg";
 import h2 from "./h2.svg";
 import h3 from "./h3.svg";
@@ -9,6 +10,16 @@ import d1 from "./d1.svg";
 import d2 from "./d2.svg";
 import d3 from "./d3.svg";
 import d4 from "./d4.svg";
+=======
+import h1 from "./assets/h1.svg";
+import h2 from "./assets/h2.svg";
+import h3 from "./assets/h3.svg";
+import h4 from "./assets/h4.svg";
+import d1 from "./assets/d1.svg";
+import d2 from "./assets/d2.svg";
+import d3 from "./assets/d3.svg";
+import d4 from "./assets/d4.svg";
+>>>>>>> origin/dev-feature
 
 const imageMap: { [key: string]: string } = {
   d1: h1,

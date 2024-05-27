@@ -1,55 +1,3 @@
-// //@ts-nocheck
-// //로그인페이지1
-// import  React from "react";
-// import { useNavigate } from 'react-router-dom';
-// import styled from "styled-components";
-// import logo from "./logo.svg";
-// import nlogo from "./naver.svg";
-// import klogo from "./kakao.svg";
-// import glogo from "./google.svg";
-
-// //window객체에 Kakao라는 객체가 존재한다고 알려주는 변수
-// const kakao = (window as any).Kakako;
-// // 로그인 컴포넌트
-// const Login: React.FC = () => {
-//   const navigate = useNavigate();
-
-//   const BackBtn: React.MouseEventHandler<HTMLButtonElement> = () => {
-//     navigate('/home'); // 바로 이전 페이지로 이동
-//   };
-
-//   return (
-//     <Container>
-//       <Whitebox>
-//         <Logo>
-//           <img src={logo} style={{ width: "100px" }} alt="logo" />
-//         </Logo>
-
-//         <PreviousButton onClick={BackBtn}>X</PreviousButton>
-
-//         <ButtonBox>
-//           <Button1 $color="#00C73C" $textColor="#FFF">
-//             <img src={nlogo} alt="Naver logo" />
-//             <span>네이버로 간편 가입하기</span>
-//           </Button1>
-//           <Button2 $color="#FFD740" $textColor="#424242">
-//             <img src={klogo} alt="Kakao logo" onClick={()=>kakao.Auth.authorize({
-//               redirectUril:"${url}",
-//               scopre: "profile_nickname,profile_image,account_email",
-//             })}/>
-//             <span>카카오로 간편 가입하기</span>
-//           </Button2>
-//           <Button3 $color="#EEE" $textColor="#424242">
-//             <img src={glogo} alt="Google logo" />
-//             <span>구글로 가입하기</span>
-//           </Button3>
-//         </ButtonBox>
-//       </Whitebox>
-//     </Container>
-//   );
-// }
-
-// export default Login;
 // 스타일드 컴포넌트 정의
 const Container = styled.div`
   background: #FFD66C;
@@ -156,10 +104,17 @@ import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+<<<<<<< HEAD
 import logo from "./logo.svg";
 import nlogo from "./naver.svg";
 import klogo from "./kakao.svg";
 import glogo from "./google.svg";
+=======
+import logo from "./assets/logo.svg";
+import nlogo from "./assets/naver.svg";
+import klogo from "./assets/kakao.svg";
+import glogo from "./assets/google.svg";
+>>>>>>> origin/dev-feature
 
 //window객체에 Kakao라는 객체가 존재한다고 알려주는 변수
 const kakao = (window as any).Kakao;
@@ -192,7 +147,11 @@ const Login: React.FC = () => {
         <PreviousButton onClick={BackBtn}>X</PreviousButton>
 
         <ButtonBox>
+<<<<<<< HEAD
           <Button1 $color="#00C73C" $textColor="#FFF">
+=======
+          <Button1 $color="#00C73C" $textColor="#FFF" onClick={() => navigate('/setProfile')}>
+>>>>>>> origin/dev-feature
             <img src={nlogo} alt="Naver logo" />
             <span>네이버로 간편 가입하기</span>
           </Button1>

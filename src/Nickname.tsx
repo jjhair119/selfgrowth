@@ -21,7 +21,7 @@ function Nickname(): JSX.Element {
   const handleNextButtonClick = (): void => {
     if (isValidNickname) {
       // isValidNickname가 유효한 경우 다음 페이지로 이동
-      navigate('/setprofile');
+      navigate('/setProfile');
     }
   };
 

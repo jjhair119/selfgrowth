@@ -1,8 +1,8 @@
 //@ts-nocheck
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import defaultProfileImg from './basic.svg';
-import buttonimg from './button.svg';
+import defaultProfileImg from './assets/basic.svg';
+import buttonimg from './assets/button.svg';
 import styled, {css} from "styled-components"
 
 interface ProfileImgType {
@@ -123,8 +123,9 @@ function SetProfile(): JSX.Element {
   };
   
   const handleNextButtonClick = (): void => {
+    navigate('/setCharacter'); //라우팅 확인용 임시 코드
     if (IsComplete) {
-      navigate('/character');
+      navigate('/setCharacter');
     }
   }
 

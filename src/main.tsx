@@ -9,6 +9,11 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
+import Auth from "./Auth.tsx";
+import Nickname from "./Nickname.tsx";
+import Character from "./Character.tsx";
+import SetProfile from "./SetProfile.tsx";
+import Login from "./Login.tsx";
 
 
 const router = createBrowserRouter([
@@ -30,7 +35,22 @@ const router = createBrowserRouter([
             }
         ]
     },
-
+    {
+        path: "/register",
+        element: <Login/>,
+    },
+    {
+        path: "/setNickname",
+        element: <Nickname/>,
+    },
+    {
+        path: "/setCharacter",
+        element: <Character/>,
+    },
+    {
+        path: "/setProfile",
+        element: <SetProfile/>,
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

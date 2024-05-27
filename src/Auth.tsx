@@ -25,7 +25,7 @@ function Auth(): JSX.Element {
     const signUp = async () => {
         try {
             // 바로 nickname 페이지로 이동
-            navigate("/nickname");
+            navigate("/setNickname");
         } catch (error) {
             console.error("Error during sign up:", error);
         }
