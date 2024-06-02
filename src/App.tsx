@@ -16,6 +16,7 @@ const Wrap = styled.div`
     height: 100vh;
 
     min-width: 870px;
+    min-height: 870px;
 
     align-items: center;
     justify-content: center;
@@ -24,6 +25,7 @@ const Wrap = styled.div`
 `
 
 const NavigationWrap = styled.div<{ $bgColor?: string }>`
+    
     display: flex;
     align-content: space-around;
     justify-content: center;
@@ -128,10 +130,21 @@ export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: nu
     `}
 `
 
+const Logo = styled.div`
+    position: absolute;
+    left:2%
+`
+
+const ProfileImg = styled.div`
+    position: absolute;
+    right:2%
+`
+
 function App() {
     return (
         <Wrap>
             <NavigationWrap>
+                <Logo><img src="..\src\assets\mainlogo.png" alt="logo"/></Logo>
                 <Link to="/home">
                     <MainButton $currentButton="HOME">
                         <div>home</div>
@@ -150,6 +163,7 @@ function App() {
                         <ToolTip>🐾 마이 페이지 이동</ToolTip>
                     </MainButton>
                 </Link>
+                <ProfileImg><img src="..\src\assets\profile.png" alt="profile"/></ProfileImg>
             </NavigationWrap>
             <MainContentWrap>
                 <Routes>

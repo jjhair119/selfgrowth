@@ -16,6 +16,7 @@ const CalendarWrap = styled.div`
     flex-grow: 1;
     height: 100%;
     position: relative;
+    min-height: 1000px;
 `;
 
 const PreviousButton = styled.div`

@@ -1,22 +1,20 @@
 import styled from "styled-components";
 
 const DiaryPop = styled.div`
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-  background: #ffffff;
+    background: #ffffff;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+    display: flex;
+    align-items: center;
 
-  flex-direction: column;
-  flex-grow: 0;
+    flex-direction: column;
 
-  width: 100%;
-  height: 70%;
+    width: 48%;
+    min-width: 620px;
 
-  padding: 34px;
-  border-radius: 32px;
+    padding: 64px;
+    border-radius: 64px;
 `;
 
 export default DiaryPop;

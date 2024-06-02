@@ -4,6 +4,7 @@ import {ConfirmButton} from "./App.tsx";
 import {Link} from "react-router-dom";
 
 const CalendarView = styled.div`
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     display: flex;
     background: white;
     flex-direction: column;
@@ -11,7 +12,7 @@ const CalendarView = styled.div`
     flex-grow: 0;
 
     width: 48%;
-    min-width: 560px;
+    min-width: 620px;
 
     padding: 64px 32px;
     border-radius: 64px;
@@ -257,7 +258,7 @@ const Calendar: React.FC<CalendarProps> = ({currentYear, currentMonth, selectedD
             </Link>
         </ConfirmButtonWrap>
     </CalendarView>
-        <div style={{ marginTop: 32 }}>💡 일기를 작성할 날짜를 선택해주세요</div>
+        <div style={{ marginTop: 32, fontSize: 20}}>💡 일기를 작성할 날짜를 선택해주세요</div>
     </>
 
 }

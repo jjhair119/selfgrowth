@@ -2,29 +2,29 @@ import styled from "styled-components";
 import React from "react";
 
 const SaveButtonStyle = styled.button`
-  bottom: 50px;
-  width: 150px;
-  height: 36px;
-  flex-shrink: 0;
+    bottom: 50px;
+    width: 150px;
+    height: 36px;
+    margin-top: 20px;
+    flex-shrink: 0;
 
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.1);
 
-  color: #000;
-  text-align: center;
-  font-family: Inter;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-  border: none;
+    color: #000;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    border: none;
 
-  &:hover {
-    background: #e95c42;
-    transition: 0.3s;
-    box-shadow: inset 0 0 10px burgundy;
-    color: #fff;
-  }
+    &:hover {
+        background: #e95c42;
+        transition: 0.3s;
+        box-shadow: inset 0 0 10px;
+        color: #fff;
+    }
 `;
 
 interface EditButtonsProps {

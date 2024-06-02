@@ -1,7 +1,15 @@
 import styled from "styled-components"
+import "./components/nobackground.png"
 
 interface HomeProps {
 }
+
+const Pet = styled.img`
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%);
+`
 
 const Ground = styled.div`
     position: absolute;
@@ -21,7 +29,7 @@ const Home: React.FC<HomeProps> = () => {
 
     return (
         <div>
-            <Ground></Ground>
+            <Ground><Pet src="./components/nobackground.png" alt="pet"/></Ground>
         </div>
     )
 }

@@ -2,20 +2,16 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const TitleStyle = styled.input`
-  position: absolute;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 18px;
 
   display: flex;
-  width: 240px;
+  width: 98%;
 
   color: #000;
   text-align: center;
-  margin-top: 17px;
-  margin-bottom: 16px;
   border: none;
   background-color: transparent;
 
