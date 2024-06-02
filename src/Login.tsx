@@ -127,7 +127,7 @@ const Login: React.FC = () => {
     }, []);
 
     const handleKakaoLogin = () => {
-        window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'b33b03136b166b263f1cff4fbe79091b'}&redirect_uri=${window.location.href + 'auth/kakao/login'}`;
+        window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'b33b03136b166b263f1cff4fbe79091b'}&redirect_uri=${window.location.href + '/auth/kakao/login'}`;
     };
 
     return (

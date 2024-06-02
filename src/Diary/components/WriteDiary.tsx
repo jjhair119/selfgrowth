@@ -8,7 +8,7 @@ const WriteDiary = styled.textarea`
     line-height: normal;
     display: flex;
 
-    color: #000;
+    color: gray;
     padding: 16px;
     width: 100%;
     height: 100%;

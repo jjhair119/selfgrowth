@@ -1,14 +1,14 @@
 import styled from "styled-components"
-import "./components/nobackground.png"
-
+import "./basicPet.svg"
 interface HomeProps {
 }
 
 const Pet = styled.img`
     position: absolute;
-    bottom: 50%;
+
+    top: -40%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translateX(-50%);
 `
 
 const Ground = styled.div`
@@ -26,10 +26,10 @@ const Ground = styled.div`
 
 const Home: React.FC<HomeProps> = () => {
 
-
+//basicPet이 기본 펫이고 happyPet이 행복해하는 pet
     return (
         <div>
-            <Ground><Pet src="./components/nobackground.png" alt="pet"/></Ground>
+            <Ground><Pet src="./basicPet.svg" alt="pet" width={400}/></Ground>
         </div>
     )
 }

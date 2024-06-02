@@ -56,9 +56,12 @@ const Diary: React.FC<DiaryProps> = ({year, month, day}) => {
     //         console.log(data);
     //     });
 
-    const defaultText = `오늘의 하루를 기록해주세요 !
+    const defaultText = `아래의 수정버튼을 눌러 오늘의 하루를 기록해주세요 !
+
 오늘 하루 느꼈던 감정을 중심으로 작성해주시면 더욱 좋습니다 :)
+
 ex) 오늘 하늘이 너무 맑아서 기분이 좋았다. 
+
 근데 점심으로 먹은 마라탕에 바퀴벌레가 나와서 기분이 확 나빠졌다 !!
       ...`;
 

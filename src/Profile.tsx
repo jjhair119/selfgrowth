@@ -1,3 +1,4 @@
+//마이페이지
 import styled from "styled-components";
 
 interface ProfileProps {}
