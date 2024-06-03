@@ -105,7 +105,6 @@ const CalendarDayButton = styled.div<{ $selectedDay?: number, $self?: number }>`
     background: #fff;
 
     color: #000;
-
     &:hover {
         ${(props) => (props.$selectedDay !== props.$self) && css`
             background: #e6e6e6;
@@ -142,6 +141,8 @@ const ChangeMonthButton = styled.div`
 
     font-weight: bolder;
 
+    cursor: pointer;
+    
     margin: 0 18px;
 `
 
@@ -153,7 +154,6 @@ interface CalendarProps {
     setCurrentMonth : (Number:number) => void,
     setSelectedDay : (Number?:number) => void,
 }
-
 const Calendar: React.FC<CalendarProps> = ({currentYear, currentMonth, selectedDay, setCurrentYear, setCurrentMonth, setSelectedDay}) => {
 
     //달 영문 표기용
@@ -174,7 +174,7 @@ const Calendar: React.FC<CalendarProps> = ({currentYear, currentMonth, selectedD
     const days_n = new Date(currentYear, currentMonth + 1, 0).getDate();
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
 
-    //앞쪽 black 처리
+    //앞쪽 blank 처리
     const blanks = Array(firstDay).fill(null).map((value, index) => (
         <BlankDay key={`blank-${index}`} className="calendar-day empty"></BlankDay>
     ));
@@ -263,4 +263,4 @@ const Calendar: React.FC<CalendarProps> = ({currentYear, currentMonth, selectedD
 
 }
 
-export default Calendar
+export default Calendar;

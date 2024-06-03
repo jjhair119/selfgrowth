@@ -4,7 +4,7 @@ import Profile from "./Profile.tsx";
 import CalendarScreen from "./CalendarScreen.tsx";
 import "./App.css";
 import {Link, Route, Routes} from "react-router-dom";
-
+import Login from "./Login.tsx";
 export type View = "HOME" | "DIARY" | "PROFILE";
 
 //navigation 높이
@@ -44,7 +44,6 @@ const MainContentWrap = styled.div`
 
 const ToolTip = styled.div`
     display: none;
-
     position: absolute;
     top: 120%;
     left: 50%;
@@ -59,7 +58,7 @@ const ToolTip = styled.div`
     background: #FFD66C;
     color: black;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 15px;
 
     z-index: 100;
 `
@@ -85,7 +84,7 @@ export const MainButton = styled.button<{$currentButton?:View}>`
     &:hover > ${ToolTip} {
         display: block;
     }
-
+    cursor: pointer;
     padding: 8px 16px;
     margin: 0 104px;
     width: 152px;
@@ -103,7 +102,7 @@ export const MainButton = styled.button<{$currentButton?:View}>`
 export const ConfirmButton = styled.button<{ $bgColor?: string, $isSelected?: number}>`
     display: flex;
     flex-grow: 1;
-
+    cursor: pointer;
     background: ${props => props.$bgColor};
 
     ${props => css`
@@ -134,17 +133,39 @@ const Logo = styled.div`
     position: absolute;
     left:2%
 `
-
-const ProfileImg = styled.div`
+const ProfileSection = styled.div`
     position: absolute;
-    right:2%
+    right: 2%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        width: 70px; // 프로필 이미지의 너비 설정
+        height: 70px; // 프로필 이미지의 높이 설정
+    }
 `
+
+const LogoutLink = styled.div`
+  margin-top: 10px;
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline; // 호버 시 밑줄 추가
+  }
+`;
 
 function App() {
     return (
         <Wrap>
             <NavigationWrap>
-                <Logo><img src="..\src\assets\mainlogo.png" alt="logo"/></Logo>
+                <Logo>
+                    <Link to="/home">
+                        <img src="..\src\assets\hlogo.svg" alt="logo"/>
+                    </Link>
+                </Logo>
                 <Link to="/home">
                     <MainButton $currentButton="HOME">
                         <div>home</div>
@@ -163,13 +184,21 @@ function App() {
                         <ToolTip>🐾 마이 페이지 이동</ToolTip>
                     </MainButton>
                 </Link>
-                <ProfileImg><img src="..\src\assets\profile.png" alt="profile"/></ProfileImg>
+                <ProfileSection>
+                    <Link to="/profile">
+                        <img src="..\src\assets\profile.svg" alt="profile"/>
+                    </Link>
+                    <LogoutLink>
+                        <Link to="/register" style={{ marginTop: '10px', color: 'black', textDecoration: 'none' }}>로그아웃</Link>
+                    </LogoutLink>
+                </ProfileSection>
             </NavigationWrap>
             <MainContentWrap>
                 <Routes>
                     <Route path='/home' element={<Home></Home>} />
                     <Route path='/calendar/*' element={<CalendarScreen></CalendarScreen>} />
                     <Route path='/profile' element={<Profile></Profile>} />
+                    <Route path='/register' element={<Login></Login>} />
                 </Routes>
             </MainContentWrap>
         </Wrap>

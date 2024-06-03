@@ -45,8 +45,11 @@ function Character(): JSX.Element {
   };
 
   const handleImageClick = (imageId: keyof SelectedImage) => {
-    const newImage = selectedImage[imageId] === originalImages[imageId] ? imageMap[imageId] : originalImages[imageId];
-    const newImages = { ...selectedImage, [imageId]: newImage };
+    const newImages = Object.keys(selectedImage).reduce((acc, key) => {
+      acc[key as keyof SelectedImage] = originalImages[key as keyof SelectedImage];
+      return acc;
+    }, {} as SelectedImage);
+    newImages[imageId] = imageMap[imageId];
     setSelectedImage(newImages);
   };
 
@@ -129,17 +132,17 @@ const PageTitle = styled.h1`
 const NextButton = styled.button<{ isImageSelected: boolean }>`
   border: none;
   margin-top: 60px;
-  background-color: ${({ isImageSelected }) => isImageSelected ? "#FFD66C" : "#F8EFD8"};
+  background-color: ${({ isImageSelected }) => isImageSelected ? "#FFD66C" : "#DCDCDC"};
   color: ${({ isImageSelected }) => isImageSelected ? "black" : "gray"};
-  width: ${({ isImageSelected }) => isImageSelected ? "300px" : "400px"};
+  width: ${({ isImageSelected }) => isImageSelected ? "300px" : "300px"};
   height: 77px;
   border-radius: 40px;
   cursor: poInter;
   text-align: center;
-  font-size: 30px;
+  font-size: ${({isImageSelected})=> isImageSelected ? "30px":"25px"};
   font-style: normal;
   font-family: Inter;
-  font-weight: ${({ isImageSelected }) => isImageSelected ? "600" : "400"};
+  font-weight: ${({ isImageSelected }) => isImageSelected ? "600" : "300"};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 

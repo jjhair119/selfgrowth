@@ -1,36 +1,39 @@
 import styled, {css} from "styled-components";
 
 export const ConfirmButtons = styled.button<{
-  $bgColor?: string;
-  $isSelected?: boolean;
+  $bgColor: string;
+  $isSelected?: number;
 }>`
   display: flex;
   flex-grow: 1;
 
-  background: ${(props) => props.$bgColor};
+  background-color: ${(props) => props.$bgColor};
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
 
-  ${(props) => css`
-    background: ${props.$bgColor};
+  ${({ $isSelected }) => !$isSelected && css`
+      pointer-events: none;
+      opacity: 0.6;
   `}
 
-  border-radius: 12px;
-  border: none;
+  &:hover {
+      background-color: #ccc;
+  }
 
   width: 126px;
   height: min-content;
-  padding: 12px;
   margin: 0 10%;
-
-  color: black;
   font-weight: bold;
-  font-size: 24px;
-
   justify-content: center;
 
   ${(props) =>
     props.$isSelected &&
     css`
-      background: #e95c42;
+      background-color: #e95c42;
       color: white;
     `}
 `;

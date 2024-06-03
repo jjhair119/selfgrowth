@@ -6,6 +6,7 @@ const SaveButtonStyle = styled.button`
     width: 150px;
     height: 36px;
     margin-top: 20px;
+    margin-right: 20px;
     flex-shrink: 0;
 
     border-radius: 8px;
@@ -25,7 +26,7 @@ const SaveButtonStyle = styled.button`
         box-shadow: inset 0 0 10px;
         color: #fff;
     }
-`;
+`
 
 interface EditButtonsProps {
   isEditing: boolean;

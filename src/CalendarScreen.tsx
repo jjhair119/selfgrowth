@@ -31,7 +31,7 @@ const PreviousButton = styled.div`
     height: 60px;
     color: #9E9E9E;
     font-size: 70px;
-    font-weight: bolder;
+    cursor: pointer;
 `;
 
 const CalendarScreen: React.FC = () => {

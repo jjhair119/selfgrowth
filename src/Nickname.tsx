@@ -13,7 +13,7 @@ function Nickname(): JSX.Element {
     setNickname(newNickname);
     // 여기에서 닉네임 유효성 체크
     const isValid: boolean =
-      newNickname.length <= 6 && /^[a-zA-Z0-9가-힣]*$/g.test(newNickname) && !/\s/g.test(newNickname);
+    newNickname.length > 0 && newNickname.length <= 6 && /^[a-zA-Z0-9가-힣]*$/g.test(newNickname) && !/\s/g.test(newNickname);
 
     setIsValidNickname(isValid); // isValidNickname 상태 업데이트
   };
@@ -35,7 +35,7 @@ function Nickname(): JSX.Element {
         <ButtonBox>
           <PageTitle>닉네임 설정</PageTitle>
           <PreviousButton onClick={BackBtn}>←</PreviousButton>
-          <h5 style={{ position: "absolute", top: "295px", fontFamily: "Inter", fontSize: "20px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" }}>6글자 이내, 띄어쓰기 x</h5>
+          <h5 style={{ position: "absolute", top: "295px", fontFamily: "Inter", fontSize: "20px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" }}>6글자 이내로 작성해주세요 ! 띄어쓰기 x</h5>
           <InputBar placeholder='    나 키우기에서 사용할 닉네임을 입력해주세요.'
             id="nickname" type="text" value={nickname} onChange={handleNicknameChange}></InputBar>
           <div className="help">
