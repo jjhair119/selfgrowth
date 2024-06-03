@@ -58,7 +58,7 @@ const ToolTip = styled.div`
     background: #FFD66C;
     color: black;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 15px;
 
     z-index: 100;
 `
